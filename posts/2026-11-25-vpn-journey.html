@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>我的 VPN 之路：从 Cloudflare Workers 到免费 VPS — Bingozx Blog</title>
+<meta name="description" content="Workers 上的 VLESS 跑了两三分钟就被 Cloudflare 以滥用为由封了。这条路死了，节点只能落到真正的 VPS 上。">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <div class="brand">
+      <h1><a href="../index.html">Bingozx Blog</a></h1>
+      <nav>
+        <a href="../index.html">首页</a>
+        <a href="../about.html">关于</a>
+      </nav>
+    </div>
+    <p class="tagline">编程改变世界 | 这里是 @Bingozx 的个人技术博客，与你一起探索编程的乐趣</p>
+  </header>
+
+  <main>
+    <article class="post">
+      <h1>我的 VPN 之路：从 Cloudflare Workers 到免费 VPS</h1>
+      <p class="meta">2026-11-25 · <span class="tag">VPN</span><span class="tag">VPS</span></p>
+
+      <p>最开始想走捷径：用 Cloudflare Workers 跑 VLESS over WebSocket，域名现成的，部署只要几分钟。Worker 搭好、路由绑好，一拨测真的通了，流量从 Cloudflare 的 IPv6 出口出去。</p>
+
+      <h2>两三分钟后死了</h2>
+      <p>每个新部署的 Worker 只能活两三分钟，然后所有请求都返回 500 错误 1101。重新部署没用，换个新名字能再活两三分钟，然后一样死掉。三个名字全是这个下场。</p>
+      <p>当天晚上收到 Cloudflare 信任与安全团队的邮件：滥用举报，代理 Worker 被标记为网络滥用。这条路彻底关闭了，而且不能再试——继续建代理 Worker 会连累账号上其他的 Worker。</p>
+
+      <h2>改走 VPS</h2>
+      <p>节点只能落到真正的服务器上。选了 Oracle Cloud 免费套餐（$0，Ampere A1 2 核 12GB，200GB 磁盘），同时排着另外三条队：Altare 每 3 小时自动重试一次，Nodaroo 等我自己用浏览器打开，Ascsonoway 每 6 小时盯一次库存。</p>
+      <p>部署包已经准备好了（sing-box，VLESS + Hysteria2），哪台机器先到手就往哪台上装，拨测通过再发订阅二维码。没拨测过不发，这是规矩。</p>
+
+      <blockquote>免费套餐的坑不在价格，在“能不能真的拿到手”和“能活多久”。先验证，再相信。</blockquote>
+
+      <p><a class="back" href="../index.html">← 回首页</a></p>
+    </article>
+  </main>
+
+  <footer class="site">
+    © 2026 Bingozx · 托管于 Zerops 免费套餐
+  </footer>
+</div>
+</body>
+</html>
