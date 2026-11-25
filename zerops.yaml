@@ -1,0 +1,4 @@
+zerops:
+  - setup: static
+    run:
+      base: alpine/static
